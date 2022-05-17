@@ -5,28 +5,34 @@ public class StepTracker{
     Scanner scanner = new Scanner(System.in);
 
 
-    MonthData[] monthToData;
+    MonthData[] monthToData; // ввод полей класса
 
     public StepTracker() {
-        monthToData = new MonthData[12]; // 2. изменить длины конкретных месяцев? почитать про длины массивов
-        for (int i = 0; i<monthToData.length; i++) {
+        monthToData = new MonthData[12];
+        for (int i = 0; i<monthToData.length; i++) { // инициализируем каждый месяц
             monthToData[i] = new MonthData();
         }
     }
 
-    class MonthData  { // stepTracker.monthToData[mounth].tepsPerDay[day] вот так обращаться ко дню
+    static class   MonthData  { // stepTracker.monthToData[mounth].tepsPerDay[day] вот так обращаться ко дню
         int [] stepsPerDay = new int[30]; // класс представляет собой массив из дней (то есть - месяц)
-    }                   // 1. убрать в скобках 30, оставить пустыми
-    void changeGoal(){
-        System.out.println("Сейчас Ваша цель - " + goal + " шагов в день." +
-                "\n Введите новую цель:");
-        goal = scanner.nextInt();
-        if (goal<0){
-            System.out.println("Количество шагов не может быть отрицательным!");
-        } else {
-            System.out.println("Сейчас Ваша цель - " + goal + " шагов в день");
-        }
     }
+
+void changeGoal() {
+    System.out.println("Сейчас Ваша цель - " + goal + " шагов в день." +
+            "\n Введите новую цель:");
+    do {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Проверьте формат вводимых данных.");
+            scanner.next();
+        }
+        goal = scanner.nextInt();
+        if (goal < 0) {
+            System.out.println("Количество шагов не может быть отрицательным!");
+        }
+    } while (goal < 0);
+    System.out.println("Сейчас Ваша цель - " + goal + " шагов в день");
+}
 
     void showResults () {
         System.out.println("За какой месяц нужна статистика?" +
@@ -43,7 +49,14 @@ public class StepTracker{
                 "\n 11 - ноябрь." +
                 "\n 12 - декабрь.");
         int month = scanner.nextInt();
-        printChoise();
+        stepPerDay(month);
+        summSteps(month);
+        maxStep(month);
+        medSteps(month);
+        distance(month);
+        kkal(month);
+        sequence(month);
+        /*printChoise();
         int command = scanner.nextInt();
         if (command == 1) {
             stepPerDay(month);
@@ -74,14 +87,15 @@ public class StepTracker{
                 }
             }
         }
+    }*/
     }
     void stepPerDay(int month){
         for (int i =0;i<30; i++){
-            System.out.println("День "+ i+1+ ":" +monthToData[month-1].stepsPerDay[i] );
+            System.out.println("День "+ (i+1)+ ":" +monthToData[month-1].stepsPerDay[i] );
         }
     }
     void summSteps(int month){
-        int summStepsMonth = 0;
+        int summStepsMonth = 0; // попробовать стандартную библиотеку
         for (int i =0;i<30; i++){
             summStepsMonth = monthToData[month-1].stepsPerDay[i]+summStepsMonth;
         }
@@ -89,7 +103,7 @@ public class StepTracker{
     }
     void maxStep(int month){
         int max = 0;
-        for (int i =0;i<30; i++){
+        for (int i =0;i<30; i++){ // попробовать стандартную библиотеку
             if (monthToData[month-1].stepsPerDay[i]>max){
                 max = monthToData[month-1].stepsPerDay[i];
             }
@@ -126,16 +140,13 @@ public class StepTracker{
                 seq = seq+1;
                 if (seq>max){
                     max = seq;
-                } /*else {
-                max =max;
-            }*/
-
+                }
             } else {  seq = 0;
             }
         }
         System.out.println("Лучшая серия составила "+max+" дней!");
     }
-    void printChoise (){
+    /*void printChoise (){
         System.out.println("Какие данные Вам нужны?"+
                 "\n 1 - количество шагов по дням."+
                 "\n 2 - общее количество шагов в месяц."+
@@ -144,10 +155,10 @@ public class StepTracker{
                 "\n 5 - пройденная дистанция в км."+
                 "\n 6 - количество потраченных килокалорий."+
                 "\n 7 - лучшая серия дней.");
-    }
+    }*/
 
 
-    void enterSteps (){ // возможно, будет не void
+    void enterSteps (){
         System.out.println("Выберите месяц:"+
                 "\n 1 - январь."+
                 "\n 2 - февраль."+
