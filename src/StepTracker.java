@@ -56,38 +56,7 @@ void changeGoal() {
         distance(month);
         kkal(month);
         sequence(month);
-        /*printChoise();
-        int command = scanner.nextInt();
-        if (command == 1) {
-            stepPerDay(month);
-        } else {
-            if (command == 2) {
-                summSteps(month);
-            } else {
-                if (command == 3) {
-                    maxStep(month);
-                } else {
-                    if (command == 4) {
-                        medSteps(month);
-                    } else {
-                        if (command == 5) {
-                            distance(month);
-                        } else {
-                            if (command == 6) {
-                                kkal(month);
-                            } else {
-                                if (command == 7) {
-                                    sequence(month);
-                                } else {
-                                    System.out.println("Такой функции нет!");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
+
     }
     void stepPerDay(int month){
         for (int i =0;i<30; i++){
@@ -146,17 +115,6 @@ void changeGoal() {
         }
         System.out.println("Лучшая серия составила "+max+" дней!");
     }
-    /*void printChoise (){
-        System.out.println("Какие данные Вам нужны?"+
-                "\n 1 - количество шагов по дням."+
-                "\n 2 - общее количество шагов в месяц."+
-                "\n 3 - максимальное пройденное количество шагов в месяц."+
-                "\n 4 - среднее количество шагов за месяц."+
-                "\n 5 - пройденная дистанция в км."+
-                "\n 6 - количество потраченных килокалорий."+
-                "\n 7 - лучшая серия дней.");
-    }*/
-
 
     void enterSteps (){
         System.out.println("Выберите месяц:"+
